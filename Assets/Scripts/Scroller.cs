@@ -9,15 +9,17 @@ public class Scroller : MonoBehaviour
 {
     [SerializeField] private RawImage _image;
     [SerializeField] private float _x, _y;
+    [SerializeField] private float _colorChangeDuration = 0.5f;
+    [SerializeField] private float _introDelay = 13.4f;
     private Color[] _colors = new[] {Color.blue, Color.green, Color.magenta, Color.cyan, Color.yellow, Color.white};
     private void Start()
     {
         Sequence sequence = DOTween.Sequence();
-        sequence.SetDelay(13.4f, false);
+        sequence.SetDelay(_introDelay, false);
         
         for (int i = 0; i < _colors.Length; i++)
         {
-            sequence.Append(_image.DOColor(_colors[i], 0.5f));
+            sequence.Append(_image.DOColor(_colors[i], _colorChangeDuration));
         }
         
         sequence.SetEase(Ease.Linear).SetLoops(-1);

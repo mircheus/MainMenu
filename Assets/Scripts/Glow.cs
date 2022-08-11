@@ -11,17 +11,17 @@ using DG.Tweening;
 [RequireComponent(typeof(TMP_Text))]
 public class Glow : MonoBehaviour
 {
-    // private TextMeshPro _textMesh;
+    [SerializeField] private float _glowDuration = 0.5f;
     private Material _material;
     private TMP_SDFShaderGUI tmpro;
-    
+
     private void Start()
     {
         int ID_GlowPower = Shader.PropertyToID("_GlowPower");
 
-        Debug.Log(TryGetComponent<TMP_Text>(out TMP_Text text) ? "TMP_text" : "tmpro ne ok");
+        Debug.Log(TryGetComponent<TMP_Text>(out TMP_Text text) ? "TMP_text component received" : "ERROR: TMP_text component not received");
 
         text.fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0f);
-        Tween tween = text.fontSharedMaterial.DOFloat(0.98f, ID_GlowPower, 0.5f).SetLoops(-1, LoopType.Yoyo);
+        Tween tween = text.fontSharedMaterial.DOFloat(1f, ID_GlowPower, _glowDuration).SetLoops(-1, LoopType.Yoyo);
     }
 }
